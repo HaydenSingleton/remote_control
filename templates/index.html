@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>Remote Robot Controller</title>
+    <meta property="og:title" content="Innovation Research Controller" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{% url 'index' %}static/css/global.css?{% now ' U' %}" />
+</head>
+
+<body>
+    <div class="main">
+        <h2>Innovation Research Lab</h2>
+
+        <form>
+            <label for="rotate">Rotation:</label>
+            <input class="field" id="rotate" type="number" min="0" max="360">
+
+            <label for="speed">Speed:</label>
+            <input class="field" id="speed" type="number" min="0" max="360">
+        </form>
+        <div>
+            <button>Send</button>
+        </div>
+
+    </div>
+</body>
