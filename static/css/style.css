@@ -14,8 +14,6 @@ html {
 }
 
 body {
-  display: flex;
-  align-items: center;
   padding: 2rem;
 }
 
@@ -34,17 +32,14 @@ button {
 }
 
 button:hover {
-  background-color: #ccc;
+  outline: 2px solid black;
 }
 
 button:active {
   outline: transparent;
   background-color: black;
   color: #eee;
-
-  outline: 2px solid black;
 }
-
 
 .main {
   display: flex;
@@ -57,17 +52,15 @@ button:active {
 }
 
 form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1/2fr 1fr;
   gap: 1rem;
-}
-
-form > div {
-  display: flex;
-  gap: 1rem;
+  padding: 1rem;
 }
 
 .field {
   width: 100ch;
-  height: 2lh;
+  height: 4ch;
+  font-size: large;
+  padding-left: 1ch;
 }
