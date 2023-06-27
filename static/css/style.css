@@ -35,10 +35,8 @@ button:hover {
   outline: 2px solid black;
 }
 
-button:active {
-  outline: transparent;
-  background-color: black;
-  color: #eee;
+.disabled {
+  display: none;
 }
 
 .main {
@@ -54,6 +52,8 @@ button:active {
 form {
   display: grid;
   grid-template-columns: 1/2fr 1fr;
+  max-width: 100%;
+
   gap: 1rem;
   padding: 1rem;
 }
@@ -63,4 +63,10 @@ form {
   height: 4ch;
   font-size: large;
   padding-left: 1ch;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
 }
