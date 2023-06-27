@@ -9,29 +9,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="{% url 'index' %}static/css/global.css?{% now ' U' %}" />
+    <link rel="stylesheet" href="{% url 'index' %}static/css/style.css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
 </head>
 
 <body>
     <div class="main">
-        <h2>Innovation Research Lab</h2>
-
+        <h2>Send data to Innovation Lab Robot</h2>
         <form>
-            <div>
-                <label for="rotate">Rotation:</label>
-                <input class="field" id="rotate" type="number" min="0" max="360">
-            </div>
+            <label for="rotate">Rotation (0-360)</label>
+            <input class="field" id="rotate" type="number" min="0" max="360">
 
-            <div>
-                <label for="speed">Speed:</label>
-                <input class="field" id="speed" type="number" min="0" max="360">
-            </div>
+            <label for="speed">Velocity (0-100)</label>
+            <input class="field" id="speed" type="number" min="0" max="100">
+
+            <label for="shutdown">Killswitch (send 1 to signal a shutdown)</label>
+            <input id="shutdown" type="button" class="field" value="0"
+                onclick="if (value === '0') value = '1'; else value = '0';">
         </form>
-        <div>
-            <button>
-                Send
-            </button>
-        </div>
 
+        <button onclick="send_data()">
+            Send
+        </button>
     </div>
 </body>
+
+<script>
+    async function send_data() {
+        let rotation = document.getElementById('rotate').value
+        let velocity = document.getElementById('speed').value
+        let killswitch = document.getElementById('shutdown').value
+
+        if (!rotation) rotation = 0
+        if (!velocity) velocity = 0
+
+        await fetch(
+            'send/' + rotation + '/' + velocity + '/' + killswitch,
+            {
+                method: 'POST',
+            }
+        ).then((resp) => {
+            console.log(resp.statusText)
+        })
+
+    }
+
+</script>
