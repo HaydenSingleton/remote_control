@@ -17,25 +17,31 @@
     <div class="main">
         <h2>Send data to Innovation Lab Robot</h2>
         <form>
-            <label for="rotate">Rotation (0-360)</label>
-            <input class="field" id="rotate" type="number" min="0" max="360">
+            <label for="rotate">Rotation (0-1)</label>
+            <input class="field" id="rotate" type="number" min="0" max="1">
 
-            <label for="speed">Velocity (0-100)</label>
-            <input class="field" id="speed" type="number" min="0" max="100">
+            <label for="speed">Speed (0-10)</label>
+            <input class="field" id="speed" type="number" min="0" max="10">
 
             <label for="shutdown">Killswitch (send 1 to signal a shutdown)</label>
             <input id="shutdown" type="button" class="field" value="0"
                 onclick="if (value === '0') value = '1'; else value = '0';">
         </form>
 
-        <button onclick="send_data()">
-            Send
-        </button>
+        <div class="row">
+            <button class="" onclick="connect()">
+                Connect
+            </button>
+            
+            <button class="disabled" onclick="send_data()">
+                Send
+            </button>
+        </div>
     </div>
 </body>
 
 <script>
-    async function send_data() {
+    function send_data() {
         let rotation = document.getElementById('rotate').value
         let velocity = document.getElementById('speed').value
         let killswitch = document.getElementById('shutdown').value
@@ -43,15 +49,27 @@
         if (!rotation) rotation = 0
         if (!velocity) velocity = 0
 
-        await fetch(
-            'send/' + rotation + '/' + velocity + '/' + killswitch,
-            {
-                method: 'POST',
-            }
-        ).then((resp) => {
-            console.log(resp.statusText)
-        })
+        const route = 'send/' + rotation + '/' + velocity + '/' + killswitch
 
+        fetch(route, { method: 'POST', })
+    }
+
+    function connect() {
+        const [conn, send] = document.getElementsByTagName('button')
+
+        fetch('connect', { method: 'POST' })
+
+        conn.classList.add('disabled')
+        send.classList.remove('disabled')
+    }
+
+    function disconnect() {
+        const [conn, send] = document.getElementsByTagName('button')
+
+        fetch('connect', { method: 'POST' })
+
+        send.classList.add('disabled')
+        conn.classList.remove('disabled')
     }
 
 </script>
