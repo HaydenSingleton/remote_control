@@ -1,0 +1,20 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Django website",
+            "type": "shell",
+            "command": "python3",
+            "windows": {
+                "command": "python"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/"
+            },
+            "args": ["manage.py", "runserver", "3000"],
+            "problemMatcher": []
+        },
+    ]
+}
