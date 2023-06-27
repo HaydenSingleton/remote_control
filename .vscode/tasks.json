@@ -13,8 +13,16 @@
             "options": {
                 "cwd": "${workspaceFolder}/"
             },
-            "args": ["manage.py", "runserver", "3000"],
-            "problemMatcher": []
-        },
+            "args": [
+                "manage.py",
+                "runserver",
+                "3000"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
     ]
 }
